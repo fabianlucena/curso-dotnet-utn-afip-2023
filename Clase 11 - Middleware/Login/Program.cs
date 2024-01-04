@@ -108,6 +108,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+/* Clase 11: Los middleware se cargan usando metodos que geenralmente comienzan con Use...
+ * Así mismo pueden cargarse usando él método UseMiddleware o usando una extensión ad hoc
+ */
 //app.UseMiddleware<LoggingHandlerMiddleware>();
 app.UseLoggingHandlerMiddleware();
 
@@ -118,18 +121,34 @@ app.UseLoggingHandlerMiddleware();
 app.UseAuthentication();
 app.UseAuthorization();
 
+/* Clase 11: Los middleware se cargan usando metodos que geenralmente comienzan con Use...
+ * Así mismo pueden cargarse usando él método UseMiddleware o usando una extensión ad hoc
+ */
 //app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseErrorHandlerMiddleware();
 
-app.Map("/api/login", app =>
+/* Clase 11: El Map es un tipo de middleware que permite redefinir el compoprtamiento para 
+ * rutas o partes de rutas determinadas
+ */
+/*app.Map("/api/login", app =>
 {
     app.Run(async context =>
     {
         await context.Response.WriteAsJsonAsync(new { message = "log in in maintenance" });
 
     });
-});
+});*/
 
 app.MapControllers();
+
+/* Clase 11: El Run puede ser redefinico, pero en este caso se pierde la funcionalidad automática
+ * de .NET Core de inyección automática de dependencias y carga automática de controladores y toda
+ * esa tarea debería hacerse a mano.
+ */
+/*app.Run(async context =>
+{
+    await context.Response.WriteAsJsonAsync(new { message = "Hola Mundo!" });
+
+});*/
 
 app.Run();
