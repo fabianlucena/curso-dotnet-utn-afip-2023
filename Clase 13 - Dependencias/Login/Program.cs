@@ -103,6 +103,10 @@ builder.Services.AddDbContext<DataContext>(
  * instancia por cada conexión (request).
  * Una tercer forma de definir las dependencias es Transient (AddTransient) para dependencias
  * transitorias, cada vez que se necesitan se crea una instancia aún dentro de la misma conexión.
+ * 
+ * Referencias:
+ * https://learn.microsoft.com/es-mx/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-7.0
+ * https://learn.microsoft.com/es-mx/dotnet/core/extensions/dependency-injection#service-registration-methods
  */
 Login.Configuration configuration = builder.Configuration.GetSection("Configuration").Get<Login.Configuration>() ?? new Login.Configuration();
 builder.Services.AddSingleton<Login.Configuration>(b => configuration);
